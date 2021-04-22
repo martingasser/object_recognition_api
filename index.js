@@ -4,8 +4,6 @@ const ws = require('ws')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-const todos = require('./todos')
-
 const corsOptions = {
     origin: 'http://localhost:8080'
 }
@@ -21,11 +19,9 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use('/todos', todos)
-
 app.get('/', (req, res) => {
     res.json({
-        message: 'Welcome to Todo API'
+        message: 'Welcome to Object Recognition API'
     })
 })
 
@@ -42,9 +38,6 @@ const server = http.listen(PORT, () => {
 })
 
 server.on('upgrade', (request, socket, head) => {
-    // const ip = request.socket.remoteAddress
-    // const port = request.socket.remotePort
-    // console.log(ip, port)
     wsServer.handleUpgrade(request, socket, head, socket => {
         wsServer.emit('connection', socket, request)
     })
